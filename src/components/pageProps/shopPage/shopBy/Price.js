@@ -1,8 +1,16 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import NavTitle from "./NavTitle";
 
-const Price = () => {
+const Price = ({ onPriceRangeSelect, selectedPriceRange }) => {
+  const { t } = useTranslation();
   const priceList = [
+    {
+      _id: 949,
+      priceOne: null,
+      priceTwo: null,
+      label: "All Prices"
+    },
     {
       _id: 950,
       priceOne: 0.0,
@@ -36,15 +44,18 @@ const Price = () => {
   ];
   return (
     <div className="cursor-pointer">
-      <NavTitle title="Shop by Price" icons={false} />
+      <NavTitle title={t('products.priceRange')} icons={false} />
       <div className="font-titleFont">
         <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
           {priceList.map((item) => (
             <li
               key={item._id}
-              className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
+              onClick={() => onPriceRangeSelect && onPriceRangeSelect(item.priceOne === null ? null : { min: item.priceOne, max: item.priceTwo })}
+              className={`border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 cursor-pointer transition-colors duration-300 hover:text-primeColor hover:border-gray-400 ${
+                (item.priceOne === null && selectedPriceRange === null) || (selectedPriceRange && selectedPriceRange.min === item.priceOne && selectedPriceRange.max === item.priceTwo) ? 'text-primeColor font-semibold' : ''
+              }`}
             >
-              ${item.priceOne.toFixed(2)} - ${item.priceTwo.toFixed(2)}
+              {item.label || `$${item.priceOne.toFixed(2)} - $${item.priceTwo.toFixed(2)}`}
             </li>
           ))}
         </ul>

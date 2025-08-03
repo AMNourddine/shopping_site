@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import { useTranslation } from "react-i18next";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
 import {
@@ -12,6 +13,7 @@ import SampleNextArrow from "./SampleNextArrow";
 import SamplePrevArrow from "./SamplePrevArrow";
 
 const NewArrivals = () => {
+  const { t } = useTranslation();
   const settings = {
     infinite: true,
     speed: 500,
@@ -48,7 +50,7 @@ const NewArrivals = () => {
   };
   return (
     <div className="w-full pb-16">
-      <Heading heading="New Arrivals" />
+      <Heading heading={t('products.newArrivals')} />
       <Slider {...settings}>
         <div className="px-2">
           <Product

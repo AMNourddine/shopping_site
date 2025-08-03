@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import { MdSwitchAccount } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const SpecialCase = () => {
+  const { t } = useTranslation();
   const products = useSelector((state) => state.orebiReducer.products);
   return (
     <div className="fixed top-52 right-2 z-20 hidden md:flex flex-col gap-2">
@@ -15,7 +17,7 @@ const SpecialCase = () => {
 
             <MdSwitchAccount className="text-2xl -translate-x-3 group-hover:translate-x-12 transition-transform duration-200" />
           </div>
-          <p className="text-xs font-semibold font-titleFont">Profile</p>
+          <p className="text-xs font-semibold font-titleFont">{t('common.profile')}</p>
         </div>
       </Link>
       <Link to="/cart">
@@ -25,7 +27,7 @@ const SpecialCase = () => {
 
             <RiShoppingCart2Fill className="text-2xl -translate-x-3 group-hover:translate-x-12 transition-transform duration-200" />
           </div>
-          <p className="text-xs font-semibold font-titleFont">Buy Now</p>
+          <p className="text-xs font-semibold font-titleFont">{t('common.buyNow')}</p>
           {products.length > 0 && (
             <p className="absolute top-1 right-2 bg-primeColor text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold">
               {products.length}

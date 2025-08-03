@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userInfo: [],
   products: [],
+  language: 'en',
 };
 
 export const orebiSlice = createSlice({
@@ -45,6 +46,9 @@ export const orebiSlice = createSlice({
     resetCart: (state) => {
       state.products = [];
     },
+    setLanguage: (state, action) => {
+      state.language = action.payload;
+    },
   },
 });
 
@@ -54,5 +58,6 @@ export const {
   drecreaseQuantity,
   deleteItem,
   resetCart,
+  setLanguage,
 } = orebiSlice.actions;
 export default orebiSlice.reducer;

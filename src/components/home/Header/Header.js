@@ -3,12 +3,15 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { MdClose } from "react-icons/md";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { logo, logoLight } from "../../../assets/images";
 import Image from "../../designLayouts/Image";
 import { navBarList } from "../../../constants";
 import Flex from "../../designLayouts/Flex";
+import LanguageSwitcher from "../../LanguageSwitcher/LanguageSwitcher";
 
 const Header = () => {
+  const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(true);
   const [sidenav, setSidenav] = useState(false);
   const [category, setCategory] = useState(false);
@@ -35,6 +38,9 @@ const Header = () => {
               <Image className="w-20 object-cover" imgSrc={logo} />
             </div>
           </Link>
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
           <div>
             {showMenu && (
               <motion.ul
@@ -51,7 +57,7 @@ const Header = () => {
                       to={link}
                       state={{ data: location.pathname.split("/")[1] }}
                     >
-                      <li>{title}</li>
+                      <li>{t(`nav.${title.toLowerCase()}`)}</li>
                     </NavLink>
                   ))}
                 </>
@@ -86,7 +92,7 @@ const Header = () => {
                             state={{ data: location.pathname.split("/")[1] }}
                             onClick={() => setSidenav(false)}
                           >
-                            {item.title}
+                            {t(`nav.${item.title.toLowerCase()}`)}
                           </NavLink>
                         </li>
                       ))}

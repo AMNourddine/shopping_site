@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import Product from "../../home/Products/Product";
-import { paginationItems } from "../../../constants";
-
-const items = paginationItems;
+import { useTranslation } from "react-i18next";
+import { useProducts } from "../../../contexts/ProductContext";
 function Items({ currentItems }) {
   return (
     <>
@@ -25,23 +24,80 @@ function Items({ currentItems }) {
   );
 }
 
-const Pagination = ({ itemsPerPage }) => {
+const Pagination = ({ itemsPerPage, selectedCategory, selectedColor, selectedBrand, selectedPriceRange }) => {
+  const { t } = useTranslation();
+  const { products } = useProducts();
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
   const [itemStart, setItemStart] = useState(1);
 
+  // Filter items based on all selected filters
+  const filteredItems = products.filter(item => {
+    // Category filter
+    if (selectedCategory && item.category !== selectedCategory) {
+      return false;
+    }
+    
+    // Color filter - check if item color contains the selected color
+    if (selectedColor) {
+      // Convert hex color to color name for comparison
+      const colorMap = {
+        '#22c55e': 'green',
+        '#a3a3a3': 'gray',
+        '#dc2626': 'red', 
+        '#f59e0b': 'yellow',
+        '#3b82f6': 'blue'
+      };
+      const selectedColorName = colorMap[selectedColor];
+      if (selectedColorName && !item.color.toLowerCase().includes(selectedColorName)) {
+        return false;
+      }
+    }
+    
+    // Brand filter - for now, we'll map some products to brands based on names
+    if (selectedBrand) {
+      const brandMap = {
+        'Smart Watch': 'Apple',
+        'Headphones': 'Apple', 
+        'Sun glasses': 'Ultron',
+        'Travel Bag': 'Shoppers Home',
+        'New Backpack': 'Shoppers Home'
+      };
+      const itemBrand = brandMap[item.productName] || 'Unknown';
+      if (itemBrand !== selectedBrand) {
+        return false;
+      }
+    }
+    
+    // Price range filter
+    if (selectedPriceRange) {
+      const itemPrice = parseFloat(item.price);
+      if (itemPrice < selectedPriceRange.min || itemPrice > selectedPriceRange.max) {
+        return false;
+      }
+    }
+    
+    return true;
+  });
+    
   // Simulate fetching items from another resources.
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
   const endOffset = itemOffset + itemsPerPage;
   //   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const currentItems = filteredItems.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
 
+  // Reset pagination when any filter changes
+  React.useEffect(() => {
+    setItemOffset(0);
+    setItemStart(1);
+  }, [selectedCategory, selectedColor, selectedBrand, selectedPriceRange]);
+  
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset = (event.selected * itemsPerPage) % filteredItems.length;
     setItemOffset(newOffset);
     // console.log(
     //   `User requested page number ${event.selected}, which is offset ${newOffset},`
@@ -69,8 +125,8 @@ const Pagination = ({ itemsPerPage }) => {
         />
 
         <p className="text-base font-normal text-lightText">
-          Products from {itemStart === 0 ? 1 : itemStart} to {endOffset} of{" "}
-          {items.length}
+          {t('common.productsFrom')} {itemStart === 0 ? 1 : itemStart} {t('common.to')} {Math.min(endOffset, filteredItems.length)} {t('common.of')}{" "}
+          {filteredItems.length}
         </p>
       </div>
     </div>
