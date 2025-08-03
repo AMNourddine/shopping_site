@@ -47,8 +47,16 @@
     "category": "Category",
     "brand": "Brand",
     "priceRange": "Price Range",
+    "shopByColor": "Shop by Color",
     "compare": "Compare",
     "addToWishList": "Add to Wish List"
+  },
+  "colors": {
+    "green": "Green",
+    "gray": "Gray",
+    "red": "Red",
+    "yellow": "Yellow",
+    "blue": "Blue"
   },
   "cart": {
     "shoppingCart": "Shopping Cart",
@@ -91,7 +99,9 @@
       "accessories": "Accessories",
       "clothes": "Clothes",
       "electronics": "Electronics",
-      "homeAppliances": "Home appliances"
+      "homeAppliances": "Home appliances",
+      "gadgets": "Gadgets",
+      "others": "Others"
     }
   },
   "auth": {

@@ -10,25 +10,25 @@ const Category = () => {
   const items = [
     {
       _id: 990,
-      title: "New Arrivals",
+      titleKey: "products.newArrivals",
       icons: true,
     },
     {
       _id: 991,
-      title: "Gudgets",
+      titleKey: "footer.categories.gadgets",
     },
     {
       _id: 992,
-      title: "Accessories",
+      titleKey: "footer.categories.accessories",
       icons: true,
     },
     {
       _id: 993,
-      title: "Electronics",
+      titleKey: "footer.categories.electronics",
     },
     {
       _id: 994,
-      title: "Others",
+      titleKey: "footer.categories.others",
     },
   ];
   return (
@@ -36,12 +36,12 @@ const Category = () => {
       <NavTitle title={t('products.category')} icons={false} />
       <div>
         <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
-          {items.map(({ _id, title, icons }) => (
+          {items.map(({ _id, titleKey, icons }) => (
             <li
               key={_id}
               className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center justify-between"
             >
-              {title}
+              {t(titleKey)}
               {icons && (
                 <span
                   onClick={() => setShowSubCatOne(!showSubCatOne)}

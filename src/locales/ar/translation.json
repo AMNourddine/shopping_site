@@ -47,8 +47,16 @@
     "category": "الفئة",
     "brand": "العلامة التجارية",
     "priceRange": "نطاق السعر",
+    "shopByColor": "تسوق حسب اللون",
     "compare": "مقارنة",
     "addToWishList": "أضف إلى قائمة الأمنيات"
+  },
+  "colors": {
+    "green": "أخضر",
+    "gray": "رمادي",
+    "red": "أحمر",
+    "yellow": "أصفر",
+    "blue": "أزرق"
   },
   "cart": {
     "shoppingCart": "سلة التسوق",
@@ -91,7 +99,9 @@
       "accessories": "الإكسسوارات",
       "clothes": "الملابس",
       "electronics": "الإلكترونيات",
-      "homeAppliances": "الأجهزة المنزلية"
+      "homeAppliances": "الأجهزة المنزلية",
+      "gadgets": "الأدوات",
+      "others": "أخرى"
     }
   },
   "auth": {

@@ -1,7 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import NavTitle from "./NavTitle";
 
 const Price = () => {
+  const { t } = useTranslation();
   const priceList = [
     {
       _id: 950,
@@ -36,7 +38,7 @@ const Price = () => {
   ];
   return (
     <div className="cursor-pointer">
-      <NavTitle title="Shop by Price" icons={false} />
+      <NavTitle title={t('products.priceRange')} icons={false} />
       <div className="font-titleFont">
         <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
           {priceList.map((item) => (
