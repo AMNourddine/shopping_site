@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Breadcrumbs = ({ prevLocation, title }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [locationPath, setLocationPath] = useState("");
   useEffect(() => {
@@ -15,7 +17,7 @@ const Breadcrumbs = ({ prevLocation, title }) => {
         {title}
       </h1>
       <p className="text-sm font-normal text-lightText capitalize flex items-center">
-        <span> {prevLocation === "" ? "Home" : prevLocation}</span>
+        <span> {prevLocation === "" ? t('nav.home') : prevLocation}</span>
 
         <span className="px-1">
           <HiOutlineChevronRight />

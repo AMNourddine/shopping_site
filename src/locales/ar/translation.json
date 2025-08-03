@@ -4,7 +4,8 @@
     "shop": "المتجر",
     "about": "حولنا",
     "contact": "تواصل معنا",
-    "journal": "المجلة"
+    "journal": "المجلة",
+    "shopByCategory": "تسوق حسب الفئة"
   },
   "common": {
     "search": "بحث",
@@ -18,6 +19,7 @@
     "addToCart": "أضف إلى السلة",
     "viewDetails": "عرض التفاصيل",
     "shopNow": "تسوق الآن",
+    "buyNow": "اشتر الآن",
     "newBadge": "جديد",
     "saleBadge": "تخفيض",
     "items": "عناصر",
@@ -34,7 +36,13 @@
     "page": "صفحة",
     "of": "من",
     "showing": "عرض",
-    "results": "نتائج"
+    "results": "نتائج",
+    "searchPlaceholder": "ابحث عن منتجاتك هنا",
+    "priceLabel": "السعر:",
+    "show": "عرض",
+    "productsFrom": "المنتجات من",
+    "to": "إلى",
+    "of": "من"
   },
   "products": {
     "newArrivals": "وصل حديثاً",
@@ -49,9 +57,20 @@
     "priceRange": "نطاق السعر",
     "shopByColor": "تسوق حسب اللون",
     "compare": "مقارنة",
-    "addToWishList": "أضف إلى قائمة الأمنيات"
+    "addToWishList": "أضف إلى قائمة الأمنيات",
+    "featured": "مميز",
+    "finalOffer": "العرض الأخير",
+    "firstReview": "كن أول من يترك مراجعة.",
+    "categories": "الفئات",
+    "springCollection": "مجموعة الربيع",
+    "streetwear": "ملابس الشارع",
+    "women": "نساء",
+    "tags": "علامات",
+    "sku": "رقم المنتج",
+    "notAvailable": "غير متاح"
   },
   "colors": {
+    "all": "جميع الألوان",
     "green": "أخضر",
     "gray": "رمادي",
     "red": "أحمر",
@@ -101,7 +120,9 @@
       "electronics": "الإلكترونيات",
       "homeAppliances": "الأجهزة المنزلية",
       "gadgets": "الأدوات",
-      "others": "أخرى"
+      "others": "أخرى",
+      "furniture": "الأثاث",
+      "bags": "الحقائب"
     }
   },
   "auth": {
@@ -116,7 +137,13 @@
     "forgotPassword": "نسيت كلمة المرور؟",
     "createAccount": "إنشاء حساب",
     "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
-    "dontHaveAccount": "ليس لديك حساب؟"
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "login": "تسجيل الدخول"
+  },
+  "banner": {
+    "twoYearWarranty": "ضمان لمدة عامين",
+    "freeShipping": "شحن مجاني",
+    "returnPolicy": "سياسة الإرجاع"
   },
   "pages": {
     "about": {

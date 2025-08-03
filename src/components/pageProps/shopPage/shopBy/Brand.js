@@ -3,10 +3,14 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import NavTitle from "./NavTitle";
 
-const Brand = () => {
+const Brand = ({ onBrandSelect, selectedBrand }) => {
   const { t } = useTranslation();
   const [showBrands, setShowBrands] = useState(true);
   const brands = [
+    {
+      _id: 9005,
+      title: "All",
+    },
     {
       _id: 9006,
       title: "Apple",
@@ -47,7 +51,10 @@ const Brand = () => {
             {brands.map((item) => (
               <li
                 key={item._id}
-                className="border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
+                onClick={() => onBrandSelect && onBrandSelect(item.title === "All" ? "" : item.title)}
+                className={`border-b-[1px] border-b-[#F0F0F0] pb-2 flex items-center gap-2 cursor-pointer transition-colors duration-300 hover:text-primeColor hover:border-gray-400 ${
+                  (item.title === "All" && selectedBrand === "") || selectedBrand === item.title ? 'text-primeColor font-semibold' : ''
+                }`}
               >
                 {item.title}
               </li>

@@ -4,7 +4,8 @@
     "shop": "Shop",
     "about": "About",
     "contact": "Contact",
-    "journal": "Journal"
+    "journal": "Journal",
+    "shopByCategory": "Shop by Category"
   },
   "common": {
     "search": "Search",
@@ -18,6 +19,7 @@
     "addToCart": "Add to Cart",
     "viewDetails": "View Details",
     "shopNow": "Shop Now",
+    "buyNow": "Buy Now",
     "newBadge": "New",
     "saleBadge": "Sale",
     "items": "items",
@@ -34,7 +36,13 @@
     "page": "Page",
     "of": "of",
     "showing": "Showing",
-    "results": "results"
+    "results": "results",
+    "searchPlaceholder": "Search your products here",
+    "priceLabel": "Price:",
+    "show": "Show",
+    "productsFrom": "Products from",
+    "to": "to",
+    "of": "of"
   },
   "products": {
     "newArrivals": "New Arrivals",
@@ -49,9 +57,20 @@
     "priceRange": "Price Range",
     "shopByColor": "Shop by Color",
     "compare": "Compare",
-    "addToWishList": "Add to Wish List"
+    "addToWishList": "Add to Wish List",
+    "featured": "Featured",
+    "finalOffer": "Final Offer",
+    "firstReview": "Be the first to leave a review.",
+    "categories": "Categories",
+    "springCollection": "Spring collection",
+    "streetwear": "Streetwear",
+    "women": "Women",
+    "tags": "Tags",
+    "sku": "SKU",
+    "notAvailable": "N/A"
   },
   "colors": {
+    "all": "All Colors",
     "green": "Green",
     "gray": "Gray",
     "red": "Red",
@@ -101,7 +120,9 @@
       "electronics": "Electronics",
       "homeAppliances": "Home appliances",
       "gadgets": "Gadgets",
-      "others": "Others"
+      "others": "Others",
+      "furniture": "Furniture",
+      "bags": "Bags"
     }
   },
   "auth": {
@@ -116,7 +137,13 @@
     "forgotPassword": "Forgot Password?",
     "createAccount": "Create Account",
     "alreadyHaveAccount": "Already have an account?",
-    "dontHaveAccount": "Don't have an account?"
+    "dontHaveAccount": "Don't have an account?",
+    "login": "Log in"
+  },
+  "banner": {
+    "twoYearWarranty": "Two years warranty",
+    "freeShipping": "Free shipping",
+    "returnPolicy": "Return policy"
   },
   "pages": {
     "about": {

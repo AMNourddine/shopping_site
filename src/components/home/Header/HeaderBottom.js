@@ -2,12 +2,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import Flex from "../../designLayouts/Flex";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { paginationItems } from "../../../constants";
 
 const HeaderBottom = () => {
+  const { t } = useTranslation();
   const products = useSelector((state) => state.orebiReducer.products);
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
@@ -47,7 +49,7 @@ const HeaderBottom = () => {
             className="flex h-14 cursor-pointer items-center gap-2 text-primeColor"
           >
             <HiOutlineMenuAlt4 className="w-5 h-5" />
-            <p className="text-[14px] font-normal">Shop by Category</p>
+            <p className="text-[14px] font-normal">{t('nav.shopByCategory')}</p>
 
             {show && (
               <motion.ul
@@ -57,22 +59,22 @@ const HeaderBottom = () => {
                 className="absolute top-36 z-50 bg-primeColor w-auto text-[#767676] h-auto p-4 pb-6"
               >
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Accessories
+                  {t('footer.categories.accessories')}
                 </li>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Furniture
+                  {t('footer.categories.furniture')}
                 </li>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Electronics
+                  {t('footer.categories.electronics')}
                 </li>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Clothes
+                  {t('footer.categories.clothes')}
                 </li>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Bags
+                  {t('footer.categories.bags')}
                 </li>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Home appliances
+                  {t('footer.categories.homeAppliances')}
                 </li>
               </motion.ul>
             )}
@@ -83,7 +85,7 @@ const HeaderBottom = () => {
               type="text"
               onChange={handleSearch}
               value={searchQuery}
-              placeholder="Search your products here"
+              placeholder={t('common.searchPlaceholder')}
             />
             <FaSearch className="w-5 h-5" />
             {searchQuery && (
@@ -116,7 +118,7 @@ const HeaderBottom = () => {
                         </p>
                         <p className="text-xs">{item.des}</p>
                         <p className="text-sm">
-                          Price:{" "}
+                          {t('common.priceLabel')}{" "}
                           <span className="text-primeColor font-semibold">
                             ${item.price}
                           </span>
@@ -141,19 +143,19 @@ const HeaderBottom = () => {
               >
                 <Link to="/signin">
                   <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Login
+                    {t('auth.login')}
                   </li>
                 </Link>
                 <Link onClick={() => setShowUser(false)} to="/signup">
                   <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                    Sign Up
+                    {t('auth.signUp')}
                   </li>
                 </Link>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400 hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Profile
+                  {t('common.profile')}
                 </li>
                 <li className="text-gray-400 px-4 py-1 border-b-[1px] border-b-gray-400  hover:border-b-white hover:text-white duration-300 cursor-pointer">
-                  Others
+                  {t('footer.categories.others')}
                 </li>
               </motion.ul>
             )}
