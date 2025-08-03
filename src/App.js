@@ -6,6 +6,9 @@ import {
   Route,
   ScrollRestoration,
 } from "react-router-dom";
+import './i18n';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
 import Header from "./components/home/Header/Header";
@@ -24,6 +27,23 @@ import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
 
 const Layout = () => {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const html = document.documentElement;
+    if (i18n.language === 'ar') {
+      html.setAttribute('dir', 'rtl');
+      html.classList.add('rtl');
+      html.classList.remove('ltr');
+      html.style.fontFamily = 'Noto Sans Arabic, Arial, sans-serif';
+    } else {
+      html.setAttribute('dir', 'ltr');
+      html.classList.add('ltr');
+      html.classList.remove('rtl');
+      html.style.fontFamily = 'DM Sans, sans-serif';
+    }
+  }, [i18n.language]);
+
   return (
     <div>
       <Header />

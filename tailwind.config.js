@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  darkMode: 'class',
   theme: {
     extend: {
       maxWidth: {
@@ -19,6 +20,7 @@ module.exports = {
       fontFamily: {
         bodyFont: ["DM Sans", "sans-serif"],
         titleFont: ["Poppins", "sans-serif"],
+        arabicFont: ["Noto Sans Arabic", "Arial", "sans-serif"],
       },
       colors: {
         primeColor: "#262626",
@@ -29,5 +31,18 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [
+    require("tailwind-scrollbar"),
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.rtl': {
+          direction: 'rtl',
+        },
+        '.ltr': {
+          direction: 'ltr',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 };

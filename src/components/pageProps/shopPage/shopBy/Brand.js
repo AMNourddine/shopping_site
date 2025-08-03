@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import NavTitle from "./NavTitle";
 
 const Brand = () => {
+  const { t } = useTranslation();
   const [showBrands, setShowBrands] = useState(true);
   const brands = [
     {
@@ -33,7 +35,7 @@ const Brand = () => {
         onClick={() => setShowBrands(!showBrands)}
         className="cursor-pointer"
       >
-        <NavTitle title="Shop by Brand" icons={true} />
+        <NavTitle title={t('products.brand')} icons={true} />
       </div>
       {showBrands && (
         <motion.div

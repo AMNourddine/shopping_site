@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 // import { FaPlus } from "react-icons/fa";
 import { ImPlus } from "react-icons/im";
+import { useTranslation } from "react-i18next";
 import NavTitle from "./NavTitle";
 
 const Category = () => {
+  const { t } = useTranslation();
   const [showSubCatOne, setShowSubCatOne] = useState(false);
   const items = [
     {
@@ -31,7 +33,7 @@ const Category = () => {
   ];
   return (
     <div className="w-full">
-      <NavTitle title="Shop by Category" icons={false} />
+      <NavTitle title={t('products.category')} icons={false} />
       <div>
         <ul className="flex flex-col gap-4 text-sm lg:text-base text-[#767676]">
           {items.map(({ _id, title, icons }) => (
