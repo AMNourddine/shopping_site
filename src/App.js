@@ -9,6 +9,7 @@ import {
 import './i18n';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { ProductProvider } from './contexts/ProductContext';
 import Footer from "./components/home/Footer/Footer";
 import FooterBottom from "./components/home/Footer/FooterBottom";
 import Header from "./components/home/Header/Header";
@@ -25,6 +26,14 @@ import Offer from "./pages/Offer/Offer";
 import Payment from "./pages/payment/Payment";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import Shop from "./pages/Shop/Shop";
+
+// Admin Components
+import AdminLayout from "./components/admin/AdminLayout";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
+import AdminLogin from "./pages/Admin/AdminLogin";
+import Dashboard from "./pages/Admin/Dashboard";
+import ProductList from "./pages/Admin/ProductList";
+import ProductForm from "./pages/Admin/ProductForm";
 
 const Layout = () => {
   const { i18n } = useTranslation();
@@ -74,15 +83,30 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/signup" element={<SignUp />}></Route>
       <Route path="/signin" element={<SignIn />}></Route>
+      
+      {/* Admin Routes */}
+      <Route path="/admin/login" element={<AdminLogin />}></Route>
+      <Route path="/admin" element={
+        <ProtectedRoute>
+          <AdminLayout />
+        </ProtectedRoute>
+      }>
+        <Route index element={<Dashboard />}></Route>
+        <Route path="products" element={<ProductList />}></Route>
+        <Route path="products/new" element={<ProductForm />}></Route>
+        <Route path="products/edit/:id" element={<ProductForm />}></Route>
+      </Route>
     </Route>
   )
 );
 
 function App() {
   return (
-    <div className="font-bodyFont">
-      <RouterProvider router={router} />
-    </div>
+    <ProductProvider>
+      <div className="font-bodyFont">
+        <RouterProvider router={router} />
+      </div>
+    </ProductProvider>
   );
 }
 

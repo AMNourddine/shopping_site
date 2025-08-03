@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import Product from "../../home/Products/Product";
-import { paginationItems } from "../../../constants";
 import { useTranslation } from "react-i18next";
-
-const items = paginationItems;
+import { useProducts } from "../../../contexts/ProductContext";
 function Items({ currentItems }) {
   return (
     <>
@@ -28,13 +26,14 @@ function Items({ currentItems }) {
 
 const Pagination = ({ itemsPerPage, selectedCategory, selectedColor, selectedBrand, selectedPriceRange }) => {
   const { t } = useTranslation();
+  const { products } = useProducts();
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
   const [itemStart, setItemStart] = useState(1);
 
   // Filter items based on all selected filters
-  const filteredItems = items.filter(item => {
+  const filteredItems = products.filter(item => {
     // Category filter
     if (selectedCategory && item.category !== selectedCategory) {
       return false;

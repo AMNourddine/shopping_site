@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineCopyright } from "react-icons/ai";
 
 const FooterBottom = () => {
@@ -15,6 +16,10 @@ const FooterBottom = () => {
               Powered by ReactBD.com
             </span>
           </a>
+          |
+          <Link to="/admin" className="ml-1 text-gray-500 hover:text-primeColor transition-colors">
+            Admin
+          </Link>
         </p>
       </div>
     </div>

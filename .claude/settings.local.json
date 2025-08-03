@@ -6,7 +6,13 @@
       "Bash(mkdir:*)",
       "Bash(npm start)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npx kill-port:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(node:*)",
+      "Bash(set PORT=3001)",
+      "Bash(cross-env:*)",
+      "Bash(lsof:*)"
     ],
     "deny": []
   }
