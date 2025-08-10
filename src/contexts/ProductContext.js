@@ -79,8 +79,52 @@ export const ProductProvider = ({ children }) => {
     }));
   };
 
+  const createProduct = async (productData) => {
+    try {
+      const newProduct = await productAPI.createProduct(productData);
+      // Refresh the products list
+      await loadProducts();
+      return newProduct;
+    } catch (error) {
+      console.error('Failed to create product:', error);
+      throw error;
+    }
+  };
+
+  const updateProduct = async (id, productData) => {
+    try {
+      const updatedProduct = await productAPI.updateProduct(id, productData);
+      // Refresh the products list
+      await loadProducts();
+      return updatedProduct;
+    } catch (error) {
+      console.error('Failed to update product:', error);
+      throw error;
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      await productAPI.deleteProduct(id);
+      // Refresh the products list
+      await loadProducts();
+    } catch (error) {
+      console.error('Failed to delete product:', error);
+      throw error;
+    }
+  };
+
   return (
-    <ProductContext.Provider value={{ products, updateProducts, loading, error, loadProducts }}>
+    <ProductContext.Provider value={{ 
+      products, 
+      updateProducts, 
+      loading, 
+      error, 
+      loadProducts,
+      createProduct,
+      updateProduct,
+      deleteProduct
+    }}>
       {children}
     </ProductContext.Provider>
   );

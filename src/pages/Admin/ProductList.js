@@ -4,7 +4,7 @@ import { useProducts } from "../../contexts/ProductContext";
 import { getImageSrc } from "../../utils/imageMapper";
 
 const ProductList = () => {
-  const { products, updateProducts } = useProducts();
+  const { products, deleteProduct, updateProduct } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -41,18 +41,26 @@ const ProductList = () => {
 
   const categories = [...new Set(products.map(p => p.category))];
 
-  const handleDelete = (productId) => {
+  const handleDelete = async (productId) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      const updatedProducts = products.filter(p => p._id !== productId);
-      updateProducts(updatedProducts);
+      try {
+        await deleteProduct(productId);
+      } catch (error) {
+        alert('Failed to delete product. Please try again.');
+      }
     }
   };
 
-  const handleToggleBadge = (productId) => {
-    const updatedProducts = products.map(p =>
-      p._id === productId ? { ...p, badge: !p.badge } : p
-    );
-    updateProducts(updatedProducts);
+  const handleToggleBadge = async (productId) => {
+    try {
+      const product = products.find(p => p._id === productId);
+      if (product) {
+        const updatedProductData = { ...product, badge: !product.badge };
+        await updateProduct(productId, updatedProductData);
+      }
+    } catch (error) {
+      alert('Failed to update product badge. Please try again.');
+    }
   };
 
   return (

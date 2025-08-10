@@ -1,7 +1,7 @@
 // UI Images served from public directory
 // This file provides URLs for UI elements like banners, logos, etc.
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
 
 // UI Image URLs
 export const logo = `${API_BASE_URL}/images/orebiLogo.png`;

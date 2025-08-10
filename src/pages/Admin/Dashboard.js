@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useProducts } from "../../contexts/ProductContext";
+import { getImageSrc } from "../../utils/imageMapper";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -98,7 +99,7 @@ const Dashboard = () => {
             {recentProducts.map((product) => (
               <div key={product._id} className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
                 <img
-                  src={product.img}
+                  src={getImageSrc(product.img)}
                   alt={product.productName}
                   className="w-12 h-12 object-cover rounded-lg"
                 />

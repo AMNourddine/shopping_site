@@ -1,7 +1,7 @@
 // Image mapper that converts database filenames to public image URLs
 // This approach serves images from the backend's public directory
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5002';
 
 // Function to determine the correct subdirectory for an image
 const getImagePath = (imageName) => {
