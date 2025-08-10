@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useProducts } from "../../contexts/ProductContext";
+import { getImageSrc } from "../../utils/imageMapper";
 
 const ProductList = () => {
   const { t } = useTranslation();
@@ -159,7 +160,7 @@ const ProductList = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <img
-                        src={product.img}
+                        src={getImageSrc(product.img)}
                         alt={product.productName}
                         className="h-12 w-12 rounded-lg object-cover mr-4"
                       />

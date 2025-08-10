@@ -9,6 +9,7 @@ import Badge from "./Badge";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/orebiSlice";
+import { getImageSrc } from "../../../utils/imageMapper";
 
 const Product = (props) => {
   const { t } = useTranslation();
@@ -32,7 +33,7 @@ const Product = (props) => {
     <div className="w-full relative group">
       <div className="max-w-80 max-h-80 relative overflow-y-hidden ">
         <div>
-          <Image className="w-full h-full" imgSrc={props.img} />
+          <Image className="w-full h-full" imgSrc={getImageSrc(props.img)} />
         </div>
         <div className="absolute top-6 left-8">
           {props.badge && <Badge text={t('common.newBadge')} />}
@@ -52,7 +53,7 @@ const Product = (props) => {
                     _id: props._id,
                     name: props.productName,
                     quantity: 1,
-                    image: props.img,
+                    image: getImageSrc(props.img),
                     badge: props.badge,
                     price: props.price,
                     colors: props.color,
