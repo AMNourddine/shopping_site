@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useProducts } from "../../contexts/ProductContext";
 import { getImageSrc } from "../../utils/imageMapper";
 
 const ProductList = () => {
-  const { t } = useTranslation();
   const { products, updateProducts } = useProducts();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");

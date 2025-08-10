@@ -2,12 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import {
-  bestSellerOne,
-  bestSellerTwo,
-  bestSellerThree,
-  bestSellerFour,
-} from "../../../assets/images/index";
 
 const BestSellers = () => {
   const { t } = useTranslation();
@@ -18,7 +12,7 @@ const BestSellers = () => {
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lgl:grid-cols-3 xl:grid-cols-4 gap-10">
         <Product
           _id="1011"
-          img={bestSellerOne}
+          img="bestSellerOne.webp"
           productName="Flower Base"
           price="35.00"
           color="Blank and White"
@@ -27,7 +21,7 @@ const BestSellers = () => {
         />
         <Product
           _id="1012"
-          img={bestSellerTwo}
+          img="bestSellerTwo.webp"
           productName="New Backpack"
           price="180.00"
           color="Gray"
@@ -36,7 +30,7 @@ const BestSellers = () => {
         />
         <Product
           _id="1013"
-          img={bestSellerThree}
+          img="bestSellerThree.webp"
           productName="Household materials"
           price="25.00"
           color="Mixed"
@@ -45,7 +39,7 @@ const BestSellers = () => {
         />
         <Product
           _id="1014"
-          img={bestSellerFour}
+          img="bestSellerFour.webp"
           productName="Travel Bag"
           price="220.00"
           color="Black"

@@ -3,12 +3,6 @@ import Slider from "react-slick";
 import { useTranslation } from "react-i18next";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import {
-  newArrOne,
-  newArrTwo,
-  newArrThree,
-  newArrFour,
-} from "../../../assets/images/index";
 import SampleNextArrow from "./SampleNextArrow";
 import SamplePrevArrow from "./SamplePrevArrow";
 
@@ -55,7 +49,7 @@ const NewArrivals = () => {
         <div className="px-2">
           <Product
             _id="100001"
-            img={newArrOne}
+            img="newArrOne.webp"
             productName="Round Table Clock"
             price="44.00"
             color="Black"
@@ -66,7 +60,7 @@ const NewArrivals = () => {
         <div className="px-2">
           <Product
             _id="100002"
-            img={newArrTwo}
+            img="newArrTwo.webp"
             productName="Smart Watch"
             price="250.00"
             color="Black"
@@ -77,7 +71,7 @@ const NewArrivals = () => {
         <div className="px-2">
           <Product
             _id="100003"
-            img={newArrThree}
+            img="newArrThree.webp"
             productName="cloth Basket"
             price="80.00"
             color="Mixed"
@@ -88,7 +82,7 @@ const NewArrivals = () => {
         <div className="px-2">
           <Product
             _id="100004"
-            img={newArrFour}
+            img="newArrFour.webp"
             productName="Funny toys for babies"
             price="60.00"
             color="Mixed"
@@ -99,7 +93,7 @@ const NewArrivals = () => {
         <div className="px-2">
           <Product
             _id="100005"
-            img={newArrTwo}
+            img="newArrTwo.webp"
             productName="Funny toys for babies"
             price="60.00"
             color="Mixed"

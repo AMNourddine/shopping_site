@@ -2,12 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Heading from "../Products/Heading";
 import Product from "../Products/Product";
-import {
-  spfOne,
-  spfTwo,
-  spfThree,
-  spfFour,
-} from "../../../assets/images/index";
 
 const SpecialOffers = () => {
   const { t } = useTranslation();
@@ -18,7 +12,7 @@ const SpecialOffers = () => {
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lgl:grid-cols-3 xl:grid-cols-4 gap-10">
         <Product
           _id="1101"
-          img={spfOne}
+          img="spfOne.webp"
           productName="Cap for Boys"
           price="35.00"
           color="Blank and White"
@@ -27,7 +21,7 @@ const SpecialOffers = () => {
         />
         <Product
           _id="1102"
-          img={spfTwo}
+          img="spfTwo.webp"
           productName="Tea Table"
           price="180.00"
           color="Gray"
@@ -36,7 +30,7 @@ const SpecialOffers = () => {
         />
         <Product
           _id="1103"
-          img={spfThree}
+          img="spfThree.webp"
           productName="Headphones"
           price="25.00"
           color="Mixed"
@@ -45,7 +39,7 @@ const SpecialOffers = () => {
         />
         <Product
           _id="1104"
-          img={spfFour}
+          img="spfFour.webp"
           productName="Sun glasses"
           price="220.00"
           color="Black"
