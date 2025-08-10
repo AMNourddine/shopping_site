@@ -1,20 +1,26 @@
 import React from "react";
-import { SplOfferData } from "../../../constants";
+import { useProducts } from "../../../contexts/ProductContext";
+import { getImageSrc } from "../../../utils/imageMapper";
 
 const ProductsOnSale = () => {
+  const { products } = useProducts();
+  
+  // Filter products on sale (badge: true indicates special offer)
+  const saleProducts = products.filter(product => product.badge).slice(0, 4);
+  
   return (
     <div>
       <h3 className="font-titleFont text-xl font-semibold mb-6 underline underline-offset-4 decoration-[1px]">
         Products on sale
       </h3>
       <div className="flex flex-col gap-2">
-        {SplOfferData.map((item) => (
+        {saleProducts.map((item) => (
           <div
             key={item._id}
             className="flex items-center gap-4 border-b-[1px] border-b-gray-300 py-2"
           >
             <div>
-              <img className="w-24" src={item.img} alt={item.img} />
+              <img className="w-24" src={getImageSrc(item.img)} alt={item.productName} />
             </div>
             <div className="flex flex-col gap-2 font-titleFont">
               <p className="text-base font-medium">{item.productName}</p>

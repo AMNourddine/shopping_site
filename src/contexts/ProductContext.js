@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { paginationItems as defaultProducts } from '../constants';
 import { productAPI } from '../services/api';
 
 const ProductContext = createContext();
@@ -13,8 +12,8 @@ export const useProducts = () => {
 };
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(defaultProducts);
-  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -26,24 +25,21 @@ export const ProductProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       
-      // Try to fetch from API first
+      // Fetch from API - this is now the only data source
       const apiProducts = await productAPI.getAllProducts();
-      if (apiProducts && apiProducts.length > 0) {
-        setProducts(apiProducts);
-        return;
-      }
+      setProducts(apiProducts || []);
     } catch (apiError) {
-      console.warn('Failed to fetch from API, falling back to localStorage:', apiError);
+      console.error('Failed to fetch products from API:', apiError);
+      setError('Failed to load products. Please check your connection to the server.');
       
-      // Fallback to localStorage if API fails
+      // Fallback to localStorage as last resort for offline functionality
       const savedProducts = localStorage.getItem('adminProducts');
       if (savedProducts) {
         const parsedProducts = JSON.parse(savedProducts);
         setProducts(parsedProducts);
+        setError('Showing cached products. Server unavailable.');
       } else {
-        // Final fallback to default products
-        setProducts(defaultProducts);
-        localStorage.setItem('adminProducts', JSON.stringify(defaultProducts));
+        setProducts([]);
       }
     } finally {
       setLoading(false);

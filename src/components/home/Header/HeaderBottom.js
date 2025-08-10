@@ -6,11 +6,13 @@ import { useTranslation } from "react-i18next";
 import Flex from "../../designLayouts/Flex";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { paginationItems } from "../../../constants";
+import { useProducts } from "../../../contexts/ProductContext";
+import { getImageSrc } from "../../../utils/imageMapper";
 
 const HeaderBottom = () => {
   const { t } = useTranslation();
-  const products = useSelector((state) => state.orebiReducer.products);
+  const cartProducts = useSelector((state) => state.orebiReducer.products);
+  const { products } = useProducts();
   const [show, setShow] = useState(false);
   const [showUser, setShowUser] = useState(false);
   const navigate = useNavigate();
@@ -33,11 +35,11 @@ const HeaderBottom = () => {
   };
 
   useEffect(() => {
-    const filtered = paginationItems.filter((item) =>
+    const filtered = products.filter((item) =>
       item.productName.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [searchQuery]);
+  }, [searchQuery, products]);
 
   return (
     <div className="w-full bg-[#F5F5F3] relative">
@@ -111,7 +113,7 @@ const HeaderBottom = () => {
                       key={item._id}
                       className="max-w-[600px] h-28 bg-gray-100 mb-3 flex items-center gap-3"
                     >
-                      <img className="w-24" src={item.img} alt="productImg" />
+                      <img className="w-24" src={getImageSrc(item.img)} alt={item.productName} />
                       <div className="flex flex-col gap-1">
                         <p className="font-semibold text-lg">
                           {item.productName}
@@ -163,7 +165,7 @@ const HeaderBottom = () => {
               <div className="relative">
                 <FaShoppingCart />
                 <span className="absolute font-titleFont top-3 -right-2 text-xs w-4 h-4 flex items-center justify-center rounded-full bg-primeColor text-white">
-                  {products.length > 0 ? products.length : 0}
+                  {cartProducts.length > 0 ? cartProducts.length : 0}
                 </span>
               </div>
             </Link>
