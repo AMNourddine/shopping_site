@@ -12,9 +12,12 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "framer-motion": "^8.0.2",
+    "gridfs-stream": "^1.1.1",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
     "mongoose": "^8.17.1",
+    "multer": "^2.0.2",
+    "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^3.1.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -37,7 +40,8 @@
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
     "dev": "concurrently \"npm run server\" \"npm start\"",
-    "seed": "node server/seedProducts.js"
+    "seed": "node server/seedProducts.js",
+    "migrate-images": "node server/migrateImages.js"
   },
   "eslintConfig": {
     "extends": [

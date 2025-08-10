@@ -1,62 +1,59 @@
-// Image mapper that converts database filenames to importable asset paths
-// This approach uses dynamic imports to load images on demand
+// Image mapper that converts database filenames to public image URLs
+// This approach serves images from the backend's public directory
 
-const imageImportCache = new Map();
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
-export const getImageSrc = async (imageName) => {
-  // Check cache first
-  if (imageImportCache.has(imageName)) {
-    return imageImportCache.get(imageName);
-  }
-
-  try {
-    let imagePath;
-    
-    // Determine the correct path based on filename patterns
-    if (imageName.startsWith('spf') && imageName.endsWith('.webp')) {
-      imagePath = await import(`../assets/images/products/specialOffer/${imageName}`);
-    } else if (imageName.startsWith('newArr') && imageName.endsWith('.webp')) {
-      imagePath = await import(`../assets/images/products/newArrival/${imageName}`);
-    } else if (imageName.startsWith('bestSeller') && imageName.endsWith('.webp')) {
-      imagePath = await import(`../assets/images/products/bestSeller/${imageName}`);
-    } else if (imageName === 'productOfTheYear.webp') {
-      imagePath = await import(`../assets/images/products/${imageName}`);
-    } else if (imageName.startsWith('IMPRIMANTE_PANTUM_') && imageName.endsWith('.webp')) {
-      imagePath = await import(`../assets/images/products/imprimante/${imageName}`);
-    } else if (imageName.match(/^(espson|hp|ricoh)\d+\.webp$/)) {
-      imagePath = await import(`../assets/images/products/imprimante/${imageName}`);
-    } else if (imageName.endsWith('.webp') && (
-      imageName.startsWith('bac') || 
-      imageName.startsWith('encre') || 
-      imageName.startsWith('ruban') || 
-      imageName.startsWith('imprimante')
-    )) {
-      imagePath = await import(`../assets/images/products/bestSeller/${imageName}`);
-    } else if (imageName.endsWith('.png')) {
-      imagePath = await import(`../assets/images/products/${imageName}`);
-    } else {
-      // Fallback
-      imagePath = await import(`../assets/images/products/${imageName}`);
-    }
-    
-    const imageUrl = imagePath.default;
-    imageImportCache.set(imageName, imageUrl);
-    return imageUrl;
-  } catch (error) {
-    console.warn(`Could not load image: ${imageName}`, error);
-    return imageName; // Fallback to original name
+// Function to determine the correct subdirectory for an image
+const getImagePath = (imageName) => {
+  // Determine path based on filename patterns
+  if (imageName.startsWith('spf') && imageName.endsWith('.webp')) {
+    return 'products/specialOffer';
+  } else if (imageName.startsWith('newArr') && imageName.endsWith('.webp')) {
+    return 'products/newArrival';
+  } else if (imageName.startsWith('bestSeller') && imageName.endsWith('.webp')) {
+    return 'products/bestSeller';
+  } else if (imageName.startsWith('IMPRIMANTE_PANTUM_') && imageName.endsWith('.webp')) {
+    return 'products/imprimante';
+  } else if (imageName.match(/^(espson|hp|ricoh)\d+\.webp$/)) {
+    return 'products/imprimante';
+  } else if (imageName.endsWith('.webp') && (
+    imageName.startsWith('bac') || 
+    imageName.startsWith('encre') || 
+    imageName.startsWith('ruban') || 
+    imageName.startsWith('imprimante')
+  )) {
+    return 'products/bestSeller';
+  } else if (imageName.startsWith('banner')) {
+    return 'banner';
+  } else if (imageName.startsWith('sale')) {
+    return 'sale';
+  } else if (imageName.includes('banner') || imageName.includes('Banner')) {
+    return 'banner';
+  } else if (imageName.includes('sale') || imageName.includes('Sale')) {
+    return 'sale';
+  } else if (imageName.endsWith('.png') && (
+    imageName.startsWith('imprimante') || 
+    imageName.startsWith('encre') || 
+    imageName.startsWith('ruban') || 
+    imageName.startsWith('bac')
+  )) {
+    return 'products';
+  } else if (imageName === 'productOfTheYear.webp') {
+    return 'products';
+  } else {
+    // Default fallback to root images directory
+    return '';
   }
 };
 
-// Synchronous version for immediate use (returns a placeholder initially)
+// Simple synchronous function that returns public image URLs
+export const getImageSrc = (imageName) => {
+  const imagePath = getImagePath(imageName);
+  const fullPath = imagePath ? `${imagePath}/${imageName}` : imageName;
+  return `${API_BASE_URL}/images/${fullPath}`;
+};
+
+// Synchronous version for immediate use (same as getImageSrc now)
 export const getImageSrcSync = (imageName) => {
-  if (imageImportCache.has(imageName)) {
-    return imageImportCache.get(imageName);
-  }
-  
-  // Load async in background
-  getImageSrc(imageName).catch(console.warn);
-  
-  // Return a placeholder or the filename as fallback
-  return `/assets/images/products/${imageName}`;
+  return getImageSrc(imageName);
 };

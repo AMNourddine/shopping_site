@@ -4,7 +4,7 @@ import {
   saleImgOne,
   saleImgTwo,
   saleImgThree,
-} from "../../../assets/images/index";
+} from "../../../utils/uiImages";
 import Image from "../../designLayouts/Image";
 
 const Sale = () => {

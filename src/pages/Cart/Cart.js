@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../../components/pageProps/Breadcrumbs";
 import { resetCart } from "../../redux/orebiSlice";
-import { emptyCart } from "../../assets/images/index";
+import { emptyCart } from "../../utils/uiImages";
 import ItemCard from "./ItemCard";
 
 const Cart = () => {

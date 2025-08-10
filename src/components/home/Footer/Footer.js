@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FaFacebook, FaYoutube, FaLinkedin, FaGithub } from "react-icons/fa";
 import FooterListTitle from "./FooterListTitle";
-import { paymentCard } from "../../../assets/images";
+import { paymentCard } from "../../../utils/uiImages";
 import Image from "../../designLayouts/Image";
 
 const Footer = () => {
