@@ -7,9 +7,15 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "concurrently": "^9.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
     "framer-motion": "^8.0.2",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
+    "mongoose": "^8.17.1",
+    "nodemon": "^3.1.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^15.6.1",
@@ -28,7 +34,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "seed": "node server/seedProducts.js"
   },
   "eslintConfig": {
     "extends": [

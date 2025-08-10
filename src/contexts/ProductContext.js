@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { paginationItems as defaultProducts } from '../constants';
+import { productAPI } from '../services/api';
 
 const ProductContext = createContext();
 
@@ -13,16 +14,39 @@ export const useProducts = () => {
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState(defaultProducts);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Load products from localStorage if available
-    const savedProducts = localStorage.getItem('adminProducts');
-    if (savedProducts) {
-      const parsedProducts = JSON.parse(savedProducts);
-      setProducts(parsedProducts);
-    } else {
-      // Initialize localStorage with default products
-      localStorage.setItem('adminProducts', JSON.stringify(defaultProducts));
+    loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Try to fetch from API first
+      const apiProducts = await productAPI.getAllProducts();
+      if (apiProducts && apiProducts.length > 0) {
+        setProducts(apiProducts);
+        return;
+      }
+    } catch (apiError) {
+      console.warn('Failed to fetch from API, falling back to localStorage:', apiError);
+      
+      // Fallback to localStorage if API fails
+      const savedProducts = localStorage.getItem('adminProducts');
+      if (savedProducts) {
+        const parsedProducts = JSON.parse(savedProducts);
+        setProducts(parsedProducts);
+      } else {
+        // Final fallback to default products
+        setProducts(defaultProducts);
+        localStorage.setItem('adminProducts', JSON.stringify(defaultProducts));
+      }
+    } finally {
+      setLoading(false);
     }
 
     // Listen for localStorage changes (when admin updates products)
@@ -47,7 +71,7 @@ export const ProductProvider = ({ children }) => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('adminProductsChanged', handleCustomStorageChange);
     };
-  }, []);
+  };
 
   const updateProducts = (newProducts) => {
     setProducts(newProducts);
@@ -60,7 +84,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   return (
-    <ProductContext.Provider value={{ products, updateProducts }}>
+    <ProductContext.Provider value={{ products, updateProducts, loading, error, loadProducts }}>
       {children}
     </ProductContext.Provider>
   );
